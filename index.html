@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment #3</title>
+</head>
+
+<body>
+
+    <div id="game">
+        <h1>The Psychic Game</h1>
+        <p>Guess what letter I'm thinking of</p>
+        <p>Wins:</p>
+        <p>Losses:</p>
+        <p>Guesses Left:</p>
+        <p>Your Guesses so far:</p>
+    </div>
+
+    <script type="text/javascript">
+    
+        // Creates an array that lists out all of the options (all letters of the alphabet).
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
+        
+        // Creating variables to hold the number of wins, losses, guesses left and guesses made so far.
+        var wins = 0;
+        var losses = 0;
+        var numGuesses = 9;
+        var guessChoices = [];
+    
+        document.onkeyup = function(event) {
+
+            var userGuess = event.key;
+
+            var computerGuess = computerChoices [Math.floor(Math.random() * computerChoices.length)];
+
+            var options = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
+            
+            if (options.indexOf(userGuess) > -1) {
+
+            if (userGuess === computerGuess) {
+					wins++;
+					numGuesses = 9;
+					guessChoices = [];
+				}
+
+				if (userGuess != computerGuess) {
+					numGuesses --;
+					guessChoices.push(userGuess);
+				}
+
+				if (numGuesses === 0) {
+
+				numGuesses = 9;
+				losses ++;
+				guessChoices = [];
+
+				
+			}
+            // Display the user and computer guesses, and wins/losses/guesses.
+			var html = 
+			"<h1> The Psychic Game </h1>" +
+			"<p>Guess what letter I'm thinking of!</p>" +
+			"<p>Wins: " + wins + "</p>" +
+			"<p>Losses: " + losses + "</p>" +
+			"<p>Guesses Left: " + numGuesses + "</p>" +
+			"<p>Your Guesses so far: " + guessChoices.join(", ") + "</p>";
+
+			document.querySelector("#game").innerHTML = html;
+
+			
+			}
+		};
+
+	</script>
+
+</body>
+</html>
